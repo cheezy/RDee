@@ -6,28 +6,50 @@ class BrowserFactory
 
   def watir_browser(target, options)
     load_target(target)
-    watir_browser_for options
+    platform, parameters = platform_and_parameters(options)
+    watir_browser_for(platform, parameters)
   end
 
   def selenium_browser(target, options)
     load_target(target)
-    selenium_browser_for options
+    platform, parameters = platform_and_parameters(options)
+    selenium_browser_for(platform, parameters)
   end
 
   private
 
-  def watir_browser_for(options)
-    Watir::Browser.new with_options(options)
+  def watir_browser_for(platform, parameters)
+    if parameters.empty?
+      Watir::Browser.new platform
+    else
+      Watir::Browser.new platform, parameters
+    end
   end
 
-  def selenium_browser_for(options)
-    Selenium::WebDriver.for with_options(options)
+  def selenium_browser_for(platform, parameters)
+    if parameters.empty?
+      Selenium::WebDriver.for platform
+    else
+      Selenium::WebDriver.for platform, parameters
+    end      
   end
 
   def load_target(target)
     target = ENV['BROWSER'].to_sym if ENV['BROWSER']
-    require "rd/targets/#{target}"
+    load "rd/targets/#{target}.rb"
     self.class.include Target
+  end
+
+  def platform_and_parameters(options)
+    platform, parameters = browser_options(options)
+    if options[:persistent_http]
+      parameters[:http_client] = http_client
+    end
+    return platform, parameters
+  end
+
+  def http_client
+    Selenium::WebDriver::Remote::Http::Persistent.new
   end
 
 end

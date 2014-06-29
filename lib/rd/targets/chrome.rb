@@ -1,5 +1,6 @@
 module Target
-  def with_options(options)
-    :chrome
+  
+  def browser_options(options)
+    return :chrome, {}
   end
 end

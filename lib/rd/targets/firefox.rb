@@ -1,6 +1,6 @@
 module Target
 
-  def with_options(options)
-    :firefox
+  def browser_options(options)
+    return :firefox, {}
   end
 end
