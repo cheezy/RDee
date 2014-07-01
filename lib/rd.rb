@@ -11,6 +11,10 @@ module RD
     factory.watir_browser(target, options)
   end
 
+  def self.configure
+    yield factory
+  end
+
   private
 
   def self.factory

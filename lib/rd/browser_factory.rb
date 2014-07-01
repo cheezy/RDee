@@ -42,7 +42,7 @@ class BrowserFactory
 
   def platform_and_parameters(options)
     platform, parameters = browser_options(options)
-    if options[:persistent_http]
+    if options[:persistent_http] or persistent_http == true
       parameters[:http_client] = http_client
     end
     return platform, parameters

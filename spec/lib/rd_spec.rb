@@ -40,5 +40,24 @@ describe RD do
       expect(watir_browser).to receive(:new).with(:firefox, http_client: client)
       RD.watir_browser(:firefox, persistent_http: true)
     end
+
+    it "should not use the persistent http client when set to false" do
+      expect(Selenium::WebDriver::Remote::Http::Persistent).to_not receive(:new)
+      expect(watir_browser).to receive(:new).with(:firefox)
+      RD.watir_browser(:firefox, persistent_http: false)
+    end
+
+    it "should allow users to set the persistent http setting by configuration" do
+      RD.configure do |config|
+        config.persistent_http = true
+      end
+      client = double('http_client')
+      expect(Selenium::WebDriver::Remote::Http::Persistent).to receive(:new).and_return(client)
+      expect(watir_browser).to receive(:new).with(:firefox, http_client: client)
+      RD.watir_browser(:firefox)
+      RD.configure do |config|
+        config.persistent_http = nil
+      end
+    end
   end
 end
