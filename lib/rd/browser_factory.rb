@@ -41,8 +41,9 @@ class BrowserFactory
   end
 
   def platform_and_parameters(options)
+    options[:url] = url unless url.nil?
     platform, parameters = browser_options(options)
-    if options[:persistent_http] or persistent_http == true
+    if options.delete(:persistent_http) or persistent_http == true
       parameters[:http_client] = http_client
     end
     return platform, parameters

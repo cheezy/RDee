@@ -59,5 +59,21 @@ describe RD do
         config.persistent_http = nil
       end
     end
+
+    it "should provide option to use a remote url" do
+      expect(watir_browser).to receive(:new).with(:remote, url: 'http://blah', desired_capabilities: anything())
+      RD.watir_browser(:firefox, url: 'http://blah')
+    end
+
+    it "should allow users to set the remote url setting by configuration" do
+      RD.configure do |config|
+        config.url = 'http://blah'
+      end
+      expect(watir_browser).to receive(:new).with(:remote, url: 'http://blah', desired_capabilities: anything())
+      RD.watir_browser(:firefox)
+      RD.configure do |config|
+        config.url = nil
+      end
+    end
   end
 end
