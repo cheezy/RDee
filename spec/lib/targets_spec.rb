@@ -24,9 +24,30 @@ describe "Supported browser combinations" do
   end
 
   context "for Internet Explorer" do
-    it "includes generic Internet Exployer" do
+    it "includes generic Internet Explorer" do
       expect(watir_browser).to receive(:new).with(:ie)
       RD.watir_browser :ie
+    end
+  end
+
+  context "for Opera" do
+    it "includes generic Opera" do
+      expect(watir_browser).to receive(:new).with(:opera)
+      RD.watir_browser :opera
+    end
+  end
+
+  context "for Phantomjs" do
+    it "includes generic Phantomjs" do
+      expect(watir_browser).to receive(:new).with(:phantomjs)
+      RD.watir_browser :phantomjs
+    end
+  end
+
+  context "for Safari" do
+    it "includes generic Safari" do
+      expect(watir_browser).to receive(:new).with(:safari)
+      RD.watir_browser :safari
     end
   end
   
