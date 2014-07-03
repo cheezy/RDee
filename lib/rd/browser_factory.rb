@@ -53,4 +53,9 @@ class BrowserFactory
     Selenium::WebDriver::Remote::Http::Persistent.new
   end
 
+  def remote_options_for(capabilities, options)
+    options[:desired_capabilities] = capabilities
+    options
+  end
+
 end
