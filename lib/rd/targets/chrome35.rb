@@ -2,10 +2,6 @@ module Target
 
   def browser_options(options)
     options[:version] = '35'
-    capabilities = remote_options_for(Selenium::WebDriver::Remote::Capabilities.chrome, options)
-    if options[:url]
-      return :remote, capabilities
-    end
-    return :firefox, capabilities
+    return desired_capabilities(:chrome, Selenium::WebDriver::Remote::Capabilities.chrome, options)
   end
 end

@@ -53,13 +53,16 @@ class BrowserFactory
     Selenium::WebDriver::Remote::Http::Persistent.new
   end
 
-  def remote_options_for(capabilities, options)
-    options[:desired_capabilities] = capabilities
+  def desired_capabilities(target, capabilities, options)
+    options[:desired_capabilities] = capabilities if options[:url]
     if options[:version]
       capabilities.version = options[:version]
       options.delete :version
     end
-    options
+    if options[:url]
+      return :remote, options
+    end
+    return target, options
   end
 
 end

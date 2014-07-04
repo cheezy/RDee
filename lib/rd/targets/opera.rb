@@ -1,9 +1,6 @@
 module Target
 
   def browser_options(options)
-    if options[:url]
-      return :remote, remote_options_for(Selenium::WebDriver::Remote::Capabilities.opera, options)
-    end
-    return :opera, options
+    return desired_capabilities(:opera, Selenium::WebDriver::Remote::Capabilities.opera, options)
   end
 end
