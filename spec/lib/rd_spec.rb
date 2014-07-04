@@ -76,9 +76,5 @@ describe RD do
       end
     end
 
-    it "should allow specifying a speciic browser version" do
-      expect(watir_browser).to receive(:new).with(:remote, url: 'http://blah', desired_capabilities: anything(), version: '22')
-      RD.watir_browser(:firefox, url: 'http://blah', version: '22')
-    end
   end
 end

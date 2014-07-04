@@ -55,6 +55,10 @@ class BrowserFactory
 
   def remote_options_for(capabilities, options)
     options[:desired_capabilities] = capabilities
+    if options[:version]
+      capabilities.version = options[:version]
+      options.delete :version
+    end
     options
   end
 
