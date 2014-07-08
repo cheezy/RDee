@@ -182,6 +182,25 @@ describe "Supported browser combinations" do
       expect(watir_browser).to receive(:new).with(:safari)
       RD.watir_browser :safari
     end
+
+      it "includes Safari 7" do
+      expect(desired_capabilities).to receive(:version=).with('7')
+      expect(watir_browser).to receive(:new).with(:remote, url: 'http://blah', desired_capabilities: anything())
+      RD.watir_browser :safari7, url: 'http://blah'
+    end
+    
+      it "includes Safari 6" do
+      expect(desired_capabilities).to receive(:version=).with('6')
+      expect(watir_browser).to receive(:new).with(:remote, url: 'http://blah', desired_capabilities: anything())
+      RD.watir_browser :safari6, url: 'http://blah'
+    end
+    
+      it "includes Safari 5" do
+      expect(desired_capabilities).to receive(:version=).with('5')
+      expect(watir_browser).to receive(:new).with(:remote, url: 'http://blah', desired_capabilities: anything())
+      RD.watir_browser :safari5, url: 'http://blah'
+    end
+    
   end
   
 end
