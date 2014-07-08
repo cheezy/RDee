@@ -141,10 +141,28 @@ describe "Supported browser combinations" do
   end
 
   context "for Opera" do
+    
+    before(:each) do
+      allow(capabilities).to receive(:opera).and_return(desired_capabilities)
+    end
+
     it "includes generic Opera" do
       expect(watir_browser).to receive(:new).with(:opera)
       RD.watir_browser :opera
     end
+    
+    it "includes Opera 12" do
+      expect(desired_capabilities).to receive(:version=).with('12')
+      expect(watir_browser).to receive(:new).with(:remote, url: 'http://blah', desired_capabilities: anything())
+      RD.watir_browser :opera12, url: 'http://blah'
+    end
+    
+    it "includes Opera 11" do
+      expect(desired_capabilities).to receive(:version=).with('11')
+      expect(watir_browser).to receive(:new).with(:remote, url: 'http://blah', desired_capabilities: anything())
+      RD.watir_browser :opera11, url: 'http://blah'
+    end
+    
   end
 
   context "for Phantomjs" do
@@ -155,6 +173,11 @@ describe "Supported browser combinations" do
   end
 
   context "for Safari" do
+    
+    before(:each) do
+      allow(capabilities).to receive(:safari).and_return(desired_capabilities)
+    end
+
     it "includes generic Safari" do
       expect(watir_browser).to receive(:new).with(:safari)
       RD.watir_browser :safari
