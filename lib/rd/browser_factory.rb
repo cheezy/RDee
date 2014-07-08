@@ -54,14 +54,11 @@ class BrowserFactory
   end
 
   def desired_capabilities(target, capabilities, options)
-    options[:desired_capabilities] = capabilities if options[:url]
-    if options[:version]
-      capabilities.version = options[:version]
-      options.delete :version
-    end
     if options[:url]
-      return :remote, options
+      options[:desired_capabilities] = capabilities
+      target = :remote
     end
+    capabilities.version = options.delete(:version) if options[:version]
     return target, options
   end
 
