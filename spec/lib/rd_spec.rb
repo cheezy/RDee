@@ -160,5 +160,27 @@ describe RD do
         config.safari_options = nil
       end
     end
+
+    it "should allow users to add additional options for Opera by configuration" do
+      RD.configure do |config|
+        config.opera_options = {opera_options: 'option'}
+      end
+      expect(watir_browser).to receive(:new).with(:opera, opera_options: 'option')
+      RD.watir_browser(:opera)
+      RD.configure do |config|
+        config.opera_options = nil
+      end
+    end
+
+    it "should not allow opera_options when not using opera" do
+      RD.configure do |config|
+        config.opera_options = {opera_options: 'option'}
+      end
+      expect(watir_browser).to receive(:new).with(:firefox)
+      RD.watir_browser(:firefox)
+      RD.configure do |config|
+        config.opera_options = nil
+      end
+    end
   end
 end

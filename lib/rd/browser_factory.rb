@@ -2,8 +2,8 @@
 
 class BrowserFactory
 
-  attr_accessor :url, :persistent_http, :chrome_options, :firefox_options, :ie_options,
-  :safari_options
+  attr_accessor :url, :persistent_http, :chrome_options, :firefox_options,
+                :ie_options, :safari_options, :opera_options
 
   def watir_browser(target, options)
     load_target(target)
@@ -70,6 +70,7 @@ class BrowserFactory
     options.merge!(firefox_options) if need_firefox_options? target
     options.merge!(ie_options) if need_ie_optons? target
     options.merge!(safari_options) if need_safari_options? target
+    options.merge!(opera_options) if need_opera_options? target
     options
   end
 
@@ -87,5 +88,9 @@ class BrowserFactory
 
   def need_safari_options?(target)
     not safari_options.nil? and target.to_s.include? 'safari'
+  end
+
+  def need_opera_options?(target)
+    not opera_options.nil? and target.to_s.include? 'opera'
   end
 end
