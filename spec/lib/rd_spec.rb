@@ -3,14 +3,13 @@ require 'selenium/webdriver/remote/http/persistent'
 
 describe RD do
 
-  context "when getting a connection for Watir" do
-    let(:watir_browser) { Watir::Browser }
+  let(:watir_browser) { Watir::Browser }
 
+  context "when getting a connection for Watir" do
     it "should create a Firefox browser by default" do
       expect(watir_browser).to receive(:new).with(:firefox)
       RD.watir_browser
     end
-
   end
 
   context "when getting a connection for Selenium" do
@@ -20,13 +19,9 @@ describe RD do
       expect(selenium_browser).to receive(:for).with(:firefox)
       RD.selenium_browser
     end
-    
   end
 
-  describe "when using common functionality" do
-    
-    let(:watir_browser) { Watir::Browser }
-
+  context "when using common functionality" do
     it "should use the BROWSER environment variable when present" do
       ENV['BROWSER'] = 'chrome'
       expect(watir_browser).to receive(:new).with(:chrome)
@@ -75,7 +70,9 @@ describe RD do
         config.url = nil
       end
     end
-
+  end
+  
+  context "when passing additional browser options" do
     it "should allow users to add additional options for chrome by configuration" do
       RD.configure do |config|
         config.chrome_options = {chrome_options: 'option'}
@@ -109,7 +106,7 @@ describe RD do
       end
     end
 
-    it "shoudl not add firefox_options when not using firefox" do
+    it "should not add firefox_options when not using firefox" do
       RD.configure do |config|
         config.firefox_options = {firefox_options: 'option'}
       end
@@ -117,6 +114,28 @@ describe RD do
       RD.watir_browser(:chrome)
       RD.configure do |config|
         config.firefox_options = nil
+      end
+    end
+
+    it "should allow users to add additional options for IE by configuration" do
+      RD.configure do |config|
+        config.ie_options = {ie_options: 'option'}
+      end
+      expect(watir_browser).to receive(:new).with(:ie, ie_options: 'option')
+      RD.watir_browser(:ie)
+      RD.configure do |config|
+        config.ie_options = nil
+      end
+    end
+
+    it "should not add ie_options when not using ie" do
+      RD.configure do |config|
+        config.ie_options = {ie_options: 'option'}
+      end
+      expect(watir_browser).to receive(:new).with(:firefox)
+      RD.watir_browser(:firefox)
+      RD.configure do |config|
+        config.ie_options = nil
       end
     end
   end
