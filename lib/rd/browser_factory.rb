@@ -2,7 +2,7 @@
 
 class BrowserFactory
 
-  attr_accessor :url, :persistent_http, :chrome_options
+  attr_accessor :url, :persistent_http, :chrome_options, :firefox_options
 
   def watir_browser(target, options)
     load_target(target)
@@ -55,6 +55,7 @@ class BrowserFactory
 
   def desired_capabilities(target, capabilities, options)
     options.merge!(chrome_options) if need_chrome_options? target
+    options.merge!(firefox_options) if need_firefox_options? target
     if options[:url]
       options[:desired_capabilities] = capabilities
       target = :remote
@@ -65,6 +66,10 @@ class BrowserFactory
 
   def need_chrome_options?(target)
     not chrome_options.nil? and target.to_s.include? 'chrome'
+  end
+
+  def need_firefox_options?(target)
+    not firefox_options.nil? and target.to_s.include? 'firefox'
   end
 
 end
