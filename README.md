@@ -1,4 +1,4 @@
-# Rd
+# RD
 
 TODO: Write a gem description
 
