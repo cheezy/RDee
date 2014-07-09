@@ -76,5 +76,26 @@ describe RD do
       end
     end
 
+    it "should allow users to add additional options for chrome by configuration" do
+      RD.configure do |config|
+        config.chrome_options = {chrome_options: 'option'}
+      end
+      expect(watir_browser).to receive(:new).with(:chrome, chrome_options: 'option')
+      RD.watir_browser(:chrome)
+      RD.configure do |config|
+        config.chrome_options = nil
+      end
+    end
+
+    it "should not add chrome_options when not using chrome" do
+      RD.configure do |config|
+        config.chrome_options = {chrome_options: 'option'}
+      end
+      expect(watir_browser).to receive(:new).with(:firefox)
+      RD.watir_browser(:firefox)
+      RD.configure do |config|
+        config.chrome_options = nil
+      end
+    end
   end
 end
