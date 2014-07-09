@@ -138,5 +138,27 @@ describe RD do
         config.ie_options = nil
       end
     end
+
+    it "should allow users to add additional options for Safari by configuration" do
+      RD.configure do |config|
+        config.safari_options = {safari_options: 'option'}
+      end
+      expect(watir_browser).to receive(:new).with(:safari, safari_options: 'option')
+      RD.watir_browser(:safari)
+      RD.configure do |config|
+        config.safari_options = nil
+      end
+    end
+
+    it "should not add safari_options when not using safari" do
+      RD.configure do |config|
+        config.safari_options = {safari_options: 'option'}
+      end
+      expect(watir_browser).to receive(:new).with(:firefox)
+      RD.watir_browser(:firefox)
+      RD.configure do |config|
+        config.safari_options = nil
+      end
+    end
   end
 end
