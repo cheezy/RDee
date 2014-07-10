@@ -36,7 +36,7 @@ class BrowserFactory
   end
 
   def load_target(target)
-    target = ENV['BROWSER'].to_sym if ENV['BROWSER']
+    target = ENV['RD_BROWSER'].to_sym if ENV['RD_BROWSER']
     load "rd/targets/#{target}.rb"
     self.class.include Target
   end

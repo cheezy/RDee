@@ -23,10 +23,10 @@ describe RD do
 
   context "when using common functionality" do
     it "should use the BROWSER environment variable when present" do
-      ENV['BROWSER'] = 'chrome'
+      ENV['RD_BROWSER'] = 'chrome'
       expect(watir_browser).to receive(:new).with(:chrome)
       RD.watir_browser
-      ENV.delete 'BROWSER'
+      ENV.delete 'RD_BROWSER'
     end
 
     it "should provide option to use persistent http client" do
