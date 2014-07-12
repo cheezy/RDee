@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'rd/version'
+require 'rdee/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "rd"
-  spec.version       = RD::VERSION
+  spec.name          = "RDee"
+  spec.version       = RDee::VERSION
   spec.authors       = ["Jeffrey S. Morgan"]
   spec.email         = ["jeff.morgan@leandog.com"]
   spec.summary       = %q{Dynamically create a connection for Selenium or Watir.}
   spec.description   = %q{Dynamically create a connection for Selenium or Watir selecting the browser, version, and host os.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/cheezy/RDee"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

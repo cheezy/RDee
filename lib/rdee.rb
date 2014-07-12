@@ -1,7 +1,7 @@
-require 'rd/version'
-require 'rd/browser_factory'
+require 'rdee/version'
+require 'rdee/browser_factory'
 
-module RD
+module RDee
 
   def self.watir_browser(target = :firefox, options = {})
     factory.watir_browser(target, options)
