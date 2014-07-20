@@ -1,5 +1,6 @@
 require 'rdee/version'
 require 'rdee/browser_factory'
+require 'rdee/target_parser'
 
 module RDee
 

@@ -1,68 +1,63 @@
-
+require_relative 'target_parser'
 
 module RDee
   class BrowserFactory
+    include TargetParser
 
     attr_accessor :url, :persistent_http, :chrome_options, :firefox_options,
     :ie_options, :safari_options, :opera_options
 
     def watir_browser(target, options)
-      load_target(target)
-      platform, parameters = platform_and_parameters(options)
-      watir_browser_for(platform, parameters)
+      platform, options = platform_and_options(target, options)
+      watir_browser_for(platform, options)
     end
 
     def selenium_browser(target, options)
-      load_target(target)
-      platform, parameters = platform_and_parameters(options)
-      selenium_browser_for(platform, parameters)
+      platform, options = platform_and_options(target, options)
+      selenium_browser_for(platform, options)
     end
 
     private
 
-    def watir_browser_for(platform, parameters)
-      if parameters.empty?
+    def watir_browser_for(platform, options)
+      if options.empty?
         Watir::Browser.new platform
       else
-        Watir::Browser.new platform, parameters
+        Watir::Browser.new platform, options
       end
     end
 
-    def selenium_browser_for(platform, parameters)
-      if parameters.empty?
+    def selenium_browser_for(platform, options)
+      if options.empty?
         Selenium::WebDriver.for platform
       else
-        Selenium::WebDriver.for platform, parameters
+        Selenium::WebDriver.for platform, options
       end      
     end
 
-    def load_target(target)
-      target = ENV['RDEE_BROWSER'].to_sym if ENV['RDEE_BROWSER']
-      load "rdee/targets/#{target}.rb"
-      self.class.include Target
+    def platform_and_options(target, options)
+      target = ENV['RDEE_BROWSER'].to_sym if ENV['RDEE_BROWSER'] 
+      platform, version, host = parse(target)
+      options.merge! additional_options_for target
+      capabilities = capabilities(platform, version, host)
+      options[:url] = url unless url.nil?
+      if options.include? :url
+        platform = :remote
+        options[:desired_capabilities] = capabilities
+      end
+      options[:http_client] = http_client if persistent_http or options.delete(:persistent_http)
+      return platform, options
     end
 
-    def platform_and_parameters(options)
-      options[:url] = url unless url.nil?
-      platform, parameters = browser_options(options)
-      if options.delete(:persistent_http) or persistent_http == true
-        parameters[:http_client] = http_client
-      end
-      return platform, parameters
+    def capabilities(platform, version, host)
+      capabilities = Selenium::WebDriver::Remote::Capabilities.send platform
+      capabilities.version = version unless version.nil?
+      capabilities.platform = host unless host.nil?
+      capabilities
     end
 
     def http_client
       Selenium::WebDriver::Remote::Http::Persistent.new
-    end
-
-    def desired_capabilities(target, capabilities, options)
-      options.merge! additional_options_for target
-      if options[:url]
-        options[:desired_capabilities] = capabilities
-        target = :remote
-      end
-      capabilities.version = options.delete(:version) if options[:version]
-      return target, options
     end
 
     def additional_options_for(target)

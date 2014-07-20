@@ -94,7 +94,7 @@ describe "Supported browser combinations" do
   context "for Internet Explorer" do
 
     before(:each) do
-      allow(capabilities).to receive(:internet_explorer).and_return(desired_capabilities)
+      allow(capabilities).to receive(:ie).and_return(desired_capabilities)
     end
 
     it "includes generic Internet Explorer" do
