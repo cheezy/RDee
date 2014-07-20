@@ -12,11 +12,17 @@ module RDee
     private
 
     def target_for(value)
-      value.to_s.split(/\d+/)[0]
+      target = value.to_s.split(/\d+/)[0]
+      target = target.split('_')[0] if target.include? '_'
+      target
     end
 
     def version_for(value)
-      value.to_s.gsub(target_for(value), '').split(/_/)[0]
+      version = value.to_s.gsub(target_for(value), '').split(/_/)[0]
+      unless version.nil?
+        version = nil if version.empty?
+      end
+      version
     end
 
     def host_for(value)
@@ -33,7 +39,7 @@ module RDee
         snow_leopard: 'OS X 10.6',
         mountain_lion: 'OS X 10.8',
         mavricks: 'OS X 10.9',
-        linux: 'linux'
+        linux: 'Linux'
       }
     end
   end

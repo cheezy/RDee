@@ -183,24 +183,84 @@ describe "Supported browser combinations" do
       RDee.watir_browser :safari
     end
 
-      it "includes Safari 7" do
+    it "includes Safari 7" do
       expect(desired_capabilities).to receive(:version=).with('7')
       expect(watir_browser).to receive(:new).with(:remote, url: 'http://blah', desired_capabilities: anything())
       RDee.watir_browser :safari7, url: 'http://blah'
     end
     
-      it "includes Safari 6" do
+    it "includes Safari 6" do
       expect(desired_capabilities).to receive(:version=).with('6')
       expect(watir_browser).to receive(:new).with(:remote, url: 'http://blah', desired_capabilities: anything())
       RDee.watir_browser :safari6, url: 'http://blah'
     end
     
-      it "includes Safari 5" do
+    it "includes Safari 5" do
       expect(desired_capabilities).to receive(:version=).with('5')
       expect(watir_browser).to receive(:new).with(:remote, url: 'http://blah', desired_capabilities: anything())
       RDee.watir_browser :safari5, url: 'http://blah'
     end
-    
   end
-  
+
+  context "for hosts" do
+    before(:each) do
+      allow(capabilities).to receive(:firefox).and_return(desired_capabilities)
+    end
+
+    it "should properly identify Windows 8.1" do
+      expect(desired_capabilities).to receive(:version=).with('30')
+      expect(desired_capabilities).to receive(:platform=).with('Windows 8.1')
+      expect(watir_browser).to receive(:new)
+      RDee.watir_browser :firefox30_win81, url: 'http://blah'
+    end
+
+    it "should properly identify Windows 8" do
+      expect(desired_capabilities).to receive(:version=).with('30')
+      expect(desired_capabilities).to receive(:platform=).with('Windows 8')
+      expect(watir_browser).to receive(:new)
+      RDee.watir_browser :firefox30_win8, url: 'http://blah'
+    end
+
+    it "should properly identify Windows 7" do
+      expect(desired_capabilities).to receive(:version=).with('30')
+      expect(desired_capabilities).to receive(:platform=).with('Windows 7')
+      expect(watir_browser).to receive(:new)
+      RDee.watir_browser :firefox30_win7, url: 'http://blah'
+    end
+    
+    it "should properly identify Windows XP" do
+      expect(desired_capabilities).to receive(:version=).with('30')
+      expect(desired_capabilities).to receive(:platform=).with('Windows XP')
+      expect(watir_browser).to receive(:new)
+      RDee.watir_browser :firefox30_winxp, url: 'http://blah'
+    end
+
+    it "should properly identify Snow Leopard" do
+      expect(desired_capabilities).to receive(:version=).with('30')
+      expect(desired_capabilities).to receive(:platform=).with('OS X 10.6')
+      expect(watir_browser).to receive(:new)
+      RDee.watir_browser :firefox30_snow_leopard, url: 'http://blah'
+    end
+
+    it "should properly identify Mountain Lion" do
+      expect(desired_capabilities).to receive(:version=).with('30')
+      expect(desired_capabilities).to receive(:platform=).with('OS X 10.8')
+      expect(watir_browser).to receive(:new)
+      RDee.watir_browser :firefox30_mountain_lion, url: 'http://blah'
+    end
+
+    it "should properly identify Mavricks" do
+      expect(desired_capabilities).to receive(:version=).with('30')
+      expect(desired_capabilities).to receive(:platform=).with('OS X 10.9')
+      expect(watir_browser).to receive(:new)
+      RDee.watir_browser :firefox30_mavricks, url: 'http://blah'
+    end
+
+    it "should properly identify Linux" do
+      expect(desired_capabilities).to receive(:version=).with('30')
+      expect(desired_capabilities).to receive(:platform=).with('Linux')
+      expect(watir_browser).to receive(:new)
+      RDee.watir_browser :firefox30_linux, url: 'http://blah'
+    end
+  end
 end
