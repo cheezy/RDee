@@ -66,7 +66,6 @@ module RDee
       options.merge!(firefox_options) if need_firefox_options? target
       options.merge!(ie_options) if need_ie_optons? target
       options.merge!(safari_options) if need_safari_options? target
-      options.merge!(opera_options) if need_opera_options? target
       options
     end
 
@@ -84,10 +83,6 @@ module RDee
 
     def need_safari_options?(target)
       not safari_options.nil? and target.to_s.include? 'safari'
-    end
-
-    def need_opera_options?(target)
-      not opera_options.nil? and target.to_s.include? 'opera'
     end
   end
 end
