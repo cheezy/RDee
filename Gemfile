@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Specify your gem's dependencies in ardi.gemspec
-gem 'rake'
+
 gem 'fuubar'
 gem 'fuubar-cucumber'
 gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
