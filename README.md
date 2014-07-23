@@ -13,7 +13,7 @@ TODO: Write usage instructions here
 
 Add this line to your application's Gemfile:
 
-    gem 'rd'
+    gem 'RDee'
 
 And then execute:
 
@@ -21,7 +21,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install rd
+    $ gem install RDee
 
 
 ## Contributing
