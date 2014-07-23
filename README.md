@@ -1,6 +1,13 @@
-# RD
+# RDee
 
-TODO: Write a gem description
+RDee is a gem that makes it easy to switch between different browsers when you are using
+Selenium or Watir as your driver.  You can also easily switch between running on a local
+browser or a browser that is part of a Selenium Grid on on Sauce Labs.
+
+## Usage
+
+TODO: Write usage instructions here
+
 
 ## Installation
 
@@ -16,9 +23,6 @@ Or install it yourself as:
 
     $ gem install rd
 
-## Usage
-
-TODO: Write usage instructions here
 
 ## Contributing
 
