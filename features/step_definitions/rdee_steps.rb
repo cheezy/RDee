@@ -2,6 +2,12 @@ When(/^I establish a (.+) browser on the local machine using (.+)$/) do |browser
   @browser = RDee.send "#{platform.downcase}_browser", browser.downcase.to_sym 
 end
 
+When(/^I establish a (.+) browser with a variable using (.+)$/) do |browser, platform|
+  ENV['RDEE_BROWSER'] = "#{browser.downcase}"
+  @browser = RDee.send "#{platform.downcase}_browser"
+  ENV.delete 'RDEE_BROWSER'
+end
+
 Then(/^I should be able to perform a google search for cheezyworld$/) do
   visit(GoogleSearch) do |page|
     page.perform_search
