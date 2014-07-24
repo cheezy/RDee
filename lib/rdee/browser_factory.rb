@@ -5,7 +5,7 @@ module RDee
     include TargetParser
 
     attr_accessor :url, :persistent_http, :chrome_options, :firefox_options,
-    :ie_options, :safari_options, :opera_options
+    :ie_options, :safari_options
 
     def watir_browser(target, options)
       platform, options = platform_and_options(target, options)
