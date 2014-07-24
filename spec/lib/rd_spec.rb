@@ -161,15 +161,5 @@ describe RDee do
       end
     end
 
-    it "should not allow opera_options when not using opera" do
-      RDee.configure do |config|
-        config.opera_options = {opera_options: 'option'}
-      end
-      expect(watir_browser).to receive(:new).with(:firefox)
-      RDee.watir_browser(:firefox)
-      RDee.configure do |config|
-        config.opera_options = nil
-      end
-    end
   end
 end
