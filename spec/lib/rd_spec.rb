@@ -10,7 +10,12 @@ describe RDee do
       expect(watir_browser).to receive(:new).with(:firefox)
       RDee.watir_browser
     end
-  end
+
+    it "should catch and print exceptions that occur when establishing a connection" do
+      expect(watir_browser).to receive(:new).and_raise(Exception, 'foo')
+      expect{ RDee.watir_browser }.to raise_error(RDee::ConnectionError, 'foo')
+    end
+end
 
   context "when getting a connection for Selenium" do
     let(:selenium_browser) { Selenium::WebDriver }
@@ -19,7 +24,12 @@ describe RDee do
       expect(selenium_browser).to receive(:for).with(:firefox)
       RDee.selenium_browser
     end
-  end
+
+    it "should catch and print exceptions that occur when establishing a connection" do
+      expect(selenium_browser).to receive(:for).and_raise(Exception, 'foo')
+      expect{ RDee.selenium_browser }.to raise_error(RDee::ConnectionError, 'foo')
+    end
+end
 
   context "when using common functionality" do
     it "should use the BROWSER environment variable when present" do
@@ -70,6 +80,7 @@ describe RDee do
         config.url = nil
       end
     end
+
   end
   
   context "when passing additional browser options" do

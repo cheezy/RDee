@@ -1,6 +1,11 @@
 require_relative 'target_parser'
 
+
+
 module RDee
+  class ConnectionError < StandardError
+  end
+  
   class BrowserFactory
     include TargetParser
 
@@ -20,19 +25,29 @@ module RDee
     private
 
     def watir_browser_for(platform, options)
-      if options.empty?
-        Watir::Browser.new platform
-      else
-        Watir::Browser.new platform, options
+      begin
+        if options.empty?
+          Watir::Browser.new platform
+        else
+          Watir::Browser.new platform, options
+        end
+      rescue Exception => e
+        $stderr.puts e
+        raise RDee::ConnectionError, e
       end
     end
 
     def selenium_browser_for(platform, options)
-      if options.empty?
-        Selenium::WebDriver.for platform
-      else
-        Selenium::WebDriver.for platform, options
-      end      
+      begin
+        if options.empty?
+          Selenium::WebDriver.for platform
+        else
+          Selenium::WebDriver.for platform, options
+        end
+      rescue Exception => e
+        $stderr.puts e
+        raise RDee::ConnectionError, e
+      end
     end
 
     def platform_and_options(target, options)
