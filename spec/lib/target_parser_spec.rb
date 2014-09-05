@@ -66,6 +66,26 @@ describe RDee::TargetParser do
     expect(host).to eql 'Linux'
   end
 
+  it "should parse ios60 for iphone" do
+    target, version, host = parser.parse(:iphone_ios60)
+    expect(host).to eql 'OS X 10.8'
+  end
+
+  it "should parse ios70 for iphone" do
+    target, version, host = parser.parse(:iphone_ios70)
+    expect(host).to eql 'OS X 10.9'
+  end
+
+  it "should parse ios71 for iphone" do
+    target, version, host = parser.parse(:iphone_ios71)
+    expect(host).to eql 'OS X 10.9'
+  end
+
+  it "should parse ios61 for iphone" do
+    target, version, host = parser.parse(:iphone_ios61)
+    expect(host).to eql 'OS X 10.8'
+  end
+
   it "should cleanly handle an invalid host" do
     target, version, host = parser.parse(:firefox30_foobar)
     expect(host).to be_nil
