@@ -174,9 +174,9 @@ end
 
     it "should allow users to add additional options for iPhone by configuration" do
       RDee.configure do |config|
-        config.iphone_options = {'device-orientation' => 'landscape'}
+        config.iphone_options = {iphone_options: 'option'}
       end
-      expect(watir_browser).to receive(:new).with(:iphone, 'device-orientation' => 'landscape')
+      expect(watir_browser).to receive(:new).with(:iphone, iphone_options: 'option')
       RDee.watir_browser(:iphone_ios70)
       RDee.configure do |config|
         config.iphone_options = nil
@@ -185,7 +185,7 @@ end
 
     it "shoudl not add iphone_options when not using iPhone" do
       RDee.configure do |config|
-        config.iphone_options = {'device-orientation' => 'landscape'}
+        config.iphone_options = {iphone_options: 'option'}
       end
       expect(watir_browser).to receive(:new).with(:firefox)
       RDee.watir_browser(:firefox)
