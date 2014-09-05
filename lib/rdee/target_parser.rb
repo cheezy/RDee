@@ -1,6 +1,8 @@
+require_relative 'mobile_devices'
 
 module RDee
   module TargetParser
+    include MobileDevices
 
     def parse(value)
       target = target_for(value)
@@ -39,10 +41,6 @@ module RDee
       value.to_s.split(/_/).slice(1..-1)[0][-2,2].insert(1, '.')
     end
 
-    def mobile?(value)
-      mobile_targets.include? target_for(value)
-    end
-
     def host_lookup
       @host_lookup ||= {
         win81: 'Windows 8.1',
@@ -60,10 +58,5 @@ module RDee
       }
     end
 
-    def mobile_targets
-      @mobile_targets ||= [
-        :iphone
-      ]
-    end
   end
 end

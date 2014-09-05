@@ -172,5 +172,16 @@ end
       end
     end
 
+    it "should allow users to add additional options for iPhone by configuration" do
+      RDee.configure do |config|
+        config.iphone_options = {'device-orientation' => 'landscape'}
+      end
+      expect(watir_browser).to receive(:new).with(:iphone, 'device-orientation' => 'landscape')
+      RDee.watir_browser(:iphone_ios70)
+      RDee.configure do |config|
+        config.iphone_options = nil
+      end
+    end
+
   end
 end

@@ -1,7 +1,5 @@
 require_relative 'target_parser'
 
-
-
 module RDee
   class ConnectionError < StandardError
   end
@@ -10,7 +8,7 @@ module RDee
     include TargetParser
 
     attr_accessor :url, :persistent_http, :chrome_options, :firefox_options,
-    :ie_options, :safari_options
+    :ie_options, :safari_options, :iphone_options
 
     def watir_browser(target, options)
       platform, options = platform_and_options(target, options)
@@ -81,6 +79,7 @@ module RDee
       options.merge!(firefox_options) if need_firefox_options? target
       options.merge!(ie_options) if need_ie_optons? target
       options.merge!(safari_options) if need_safari_options? target
+      options.merge!(iphone_options) if need_iphone_options? target
       options
     end
 
@@ -98,6 +97,10 @@ module RDee
 
     def need_safari_options?(target)
       not safari_options.nil? and target.to_s.include? 'safari'
+    end
+
+    def need_iphone_options?(target)
+      not iphone_options.nil? and target.to_s.include? 'iphone'
     end
   end
 end
