@@ -1,4 +1,5 @@
 require_relative 'target_parser'
+require_relative 'mobile_devices'
 
 module RDee
   class ConnectionError < StandardError
@@ -66,7 +67,13 @@ module RDee
       capabilities = Selenium::WebDriver::Remote::Capabilities.send platform
       capabilities.version = version unless version.nil?
       capabilities.platform = host unless host.nil?
+      add_mobile_capabilities(capabilities, platform) if mobile?(platform)
       capabilities
+    end
+
+    def add_mobile_capabilities(capabilities, platform)
+      capabilities['deviceName'] = 'iPhone'
+      capabilities['device-orientation'] = 'portrait'
     end
 
     def http_client

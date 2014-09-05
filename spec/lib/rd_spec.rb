@@ -183,5 +183,16 @@ end
       end
     end
 
+    it "shoudl not add iphone_options when not using iPhone" do
+      RDee.configure do |config|
+        config.iphone_options = {'device-orientation' => 'landscape'}
+      end
+      expect(watir_browser).to receive(:new).with(:firefox)
+      RDee.watir_browser(:firefox)
+      RDee.configure do |config|
+        config.iphone_options = nil
+      end
+    end
+
   end
 end
