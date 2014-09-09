@@ -186,8 +186,6 @@ describe "Supported browser combinations" do
     it "includes iPhone with ios 6.0" do
       expect(desired_capabilities).to receive(:version=).with('6.0')
       expect(desired_capabilities).to receive(:platform=).with('OS X 10.8')
-      expect(desired_capabilities).to receive(:[]=).with('deviceName', 'iPhone')
-      expect(desired_capabilities).to receive(:[]=).with('device-orientation', 'portrait')
       expect(watir_browser).to receive(:new).with(:remote, url: 'http://blah', desired_capabilities: anything())
       RDee.watir_browser :iphone_ios60, url: 'http://blah'
     end
@@ -195,8 +193,6 @@ describe "Supported browser combinations" do
     it "includes iPhone with ios 6.1" do
       expect(desired_capabilities).to receive(:version=).with('6.1')
       expect(desired_capabilities).to receive(:platform=).with('OS X 10.8')
-      expect(desired_capabilities).to receive(:[]=).with('deviceName', 'iPhone')
-      expect(desired_capabilities).to receive(:[]=).with('device-orientation', 'portrait')
       expect(watir_browser).to receive(:new).with(:remote, url: 'http://blah', desired_capabilities: anything())
       RDee.watir_browser :iphone_ios61, url: 'http://blah'
     end
@@ -204,8 +200,6 @@ describe "Supported browser combinations" do
     it "includes iPhone with ios 7.0" do
       expect(desired_capabilities).to receive(:version=).with('7.0')
       expect(desired_capabilities).to receive(:platform=).with('OS X 10.9')
-      expect(desired_capabilities).to receive(:[]=).with('deviceName', 'iPhone')
-      expect(desired_capabilities).to receive(:[]=).with('device-orientation', 'portrait')
       expect(watir_browser).to receive(:new).with(:remote, url: 'http://blah', desired_capabilities: anything())
       RDee.watir_browser :iphone_ios70, url: 'http://blah'
     end
@@ -213,8 +207,6 @@ describe "Supported browser combinations" do
     it "includes iPhone with ios 7.1" do
       expect(desired_capabilities).to receive(:version=).with('7.1')
       expect(desired_capabilities).to receive(:platform=).with('OS X 10.9')
-      expect(desired_capabilities).to receive(:[]=).with('deviceName', 'iPhone')
-      expect(desired_capabilities).to receive(:[]=).with('device-orientation', 'portrait')
       expect(watir_browser).to receive(:new).with(:remote, url: 'http://blah', desired_capabilities: anything())
       RDee.watir_browser :iphone_ios71, url: 'http://blah'
     end

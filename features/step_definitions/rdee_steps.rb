@@ -25,3 +25,15 @@ end
 Then(/^I should be able to close the connection$/) do
   @browser.close
 end
+
+When(/^I go to the cheezyworld site$/) do
+  visit CheezyWorld
+end
+
+When(/^I select the transformations link$/) do
+  on(CheezyWorld).transformations_element.click
+end
+
+Then(/^I should see the text "(.*?)"$/) do |message|
+  expect(@current_page.text).to include message
+end

@@ -89,7 +89,7 @@ module RDee
   end
 
   def self.selenium_browser(target = :firefox, options = {})
-    factory.watir_browser(target, options)
+    factory.selenium_browser(target, options)
   end
 
   def self.configure
