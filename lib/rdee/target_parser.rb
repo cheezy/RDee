@@ -50,11 +50,14 @@ module RDee
         snow_leopard: 'OS X 10.6',
         mountain_lion: 'OS X 10.8',
         mavricks: 'OS X 10.9',
+        yosemite: 'OS X 10.10',
         linux: 'Linux',
         ios60: 'OS X 10.8',
         ios61: 'OS X 10.8',
         ios70: 'OS X 10.9',
-        ios71: 'OS X 10.9'
+        ios71: 'OS X 10.9',
+        ios80: 'OS X 10.10',
+        ios81: 'OS X 10.10'
       }
     end
 
