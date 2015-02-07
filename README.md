@@ -49,7 +49,7 @@ firefox30_win8
 ````
 
 The first part of the target determines what browser to use.  At the current time you can
-specify `firefox`, `chrome`, `ie`, or `safari`.  In the near future we will be supporting
+specify `firefox`, `chrome`, `ie`, `safari`, `phantomjs` or `iphone`.  In the near future we will be supporting more
 mobile platforms so stay tuned.
 
 Immediately following the browser is the version.  This is optional and if you do not specify
