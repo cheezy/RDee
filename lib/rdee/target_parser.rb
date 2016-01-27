@@ -51,13 +51,20 @@ module RDee
         mountain_lion: 'OS X 10.8',
         mavricks: 'OS X 10.9',
         yosemite: 'OS X 10.10',
+        el_capitan: 'OS X 10.11',
         linux: 'Linux',
         ios60: 'OS X 10.8',
         ios61: 'OS X 10.8',
         ios70: 'OS X 10.9',
         ios71: 'OS X 10.9',
         ios80: 'OS X 10.10',
-        ios81: 'OS X 10.10'
+        ios81: 'OS X 10.10',
+        ios82: 'OS X 10.10',
+        ios83: 'OS X 10.10',
+        ios84: 'OS X 10.10',
+        ios90: 'OS X 10.11',
+        ios91: 'OS X 10.11',
+        ios92: 'OS X 10.11',
       }
     end
 
