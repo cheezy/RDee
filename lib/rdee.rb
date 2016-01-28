@@ -61,6 +61,8 @@ require 'rdee/target_parser'
 #   | snow_leopard  | OS X 10.6   |
 #   | mountain_lion | OS X 10.8   |
 #   | mavricks      | OS X 10.9   |
+#   | yosemite      | OS X 10.10  |
+#   | el_capitan    | OS X 10.11  |
 #   | linux         | Linux       |
 #
 # The host os value is typically used when running the tests on a Selenium Grid.  It is up to

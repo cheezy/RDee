@@ -1,8 +1,5 @@
-require_relative 'mobile_devices'
-
 module RDee
   module TargetParser
-    include MobileDevices
 
     def parse(value)
       target = target_for(value)
@@ -20,8 +17,7 @@ module RDee
     end
 
     def version_for(value)
-      version = mobile_version(value) if mobile?(value)
-      version = browser_version(value) unless mobile?(value)
+      version = browser_version(value)
       unless version.nil?
         version = nil if version.empty?
       end
@@ -37,10 +33,6 @@ module RDee
       value.to_s.gsub(target_for(value).to_s, '').split(/_/)[0]
     end
 
-    def mobile_version(value)
-      value.to_s.split(/_/).slice(1..-1)[0][-2,2].insert(1, '.')
-    end
-
     def host_lookup
       @host_lookup ||= {
         win81: 'Windows 8.1',
@@ -51,13 +43,8 @@ module RDee
         mountain_lion: 'OS X 10.8',
         mavricks: 'OS X 10.9',
         yosemite: 'OS X 10.10',
-        linux: 'Linux',
-        ios60: 'OS X 10.8',
-        ios61: 'OS X 10.8',
-        ios70: 'OS X 10.9',
-        ios71: 'OS X 10.9',
-        ios80: 'OS X 10.10',
-        ios81: 'OS X 10.10'
+        el_capitan: 'OS X 10.11',
+        linux: 'Linux'
       }
     end
 
