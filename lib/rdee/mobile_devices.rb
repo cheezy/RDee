@@ -9,7 +9,7 @@ module RDee
     
     def mobile_targets
       @mobile_targets ||= [
-        :iphone
+        :ios
       ]
     end
     

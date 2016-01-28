@@ -64,9 +64,21 @@ module RDee
     end
 
     def capabilities(platform, version, host)
-      capabilities = Selenium::WebDriver::Remote::Capabilities.send platform
+      if platform == :ios
+        host.downcase.include?('iphone') ? browser = 'iPhone' : browser = 'iPad'
+        capabilities = Selenium::WebDriver::Remote::Capabilities.send(browser.downcase,
+            {app: 'safari',
+             device: "#{host}",
+             platformName: 'iOS',
+             platformVersion: "#{version}",
+             deviceName: "#{host}",
+             browserName: "#{browser}"})
+        capabilities.platform = 'MAC'
+      else
+        capabilities = Selenium::WebDriver::Remote::Capabilities.send platform
+        capabilities.platform = host unless host.nil?
+      end
       capabilities.version = version unless version.nil?
-      capabilities.platform = host unless host.nil?
       capabilities
     end
 

@@ -20,8 +20,8 @@ module RDee
     end
 
     def version_for(value)
-      version = mobile_version(value) if mobile?(value)
-      version = browser_version(value) unless mobile?(value)
+      #version = mobile_version(value) if mobile?(value)
+      version = browser_version(value) #unless mobile?(value)
       unless version.nil?
         version = nil if version.empty?
       end
@@ -37,9 +37,9 @@ module RDee
       value.to_s.gsub(target_for(value).to_s, '').split(/_/)[0]
     end
 
-    def mobile_version(value)
-      value.to_s.split(/_/).slice(1..-1)[0][-2,2].insert(1, '.')
-    end
+    #def mobile_version(value)
+    #  value.to_s.split(/_/).slice(1..-1)[0][-2,2].insert(1, '.')
+    #end
 
     def host_lookup
       @host_lookup ||= {
@@ -52,12 +52,18 @@ module RDee
         mavricks: 'OS X 10.9',
         yosemite: 'OS X 10.10',
         linux: 'Linux',
-        ios60: 'OS X 10.8',
-        ios61: 'OS X 10.8',
-        ios70: 'OS X 10.9',
-        ios71: 'OS X 10.9',
-        ios80: 'OS X 10.10',
-        ios81: 'OS X 10.10'
+        ipad_2: 'iPad 2',
+        ipad_air: 'iPad Air',
+        ipad_air_2: 'iPad Air 2',
+        ipad_retina: 'iPad Retina',
+        ipad_pro: 'iPad Pro',
+        iphone_4s: 'iPhone 4s',
+        iphone_5: 'iPhone 5',
+        iphone_5s: 'iPhone 5s',
+        iphone_6: 'iPhone 6',
+        iphone_6_plus: 'iPhone 6 Plus',
+        iphone_6s: 'iPhone 6s',
+        iphone_6s_plus: 'iPhone 6s Plus'
       }
     end
 
