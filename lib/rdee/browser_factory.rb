@@ -1,5 +1,4 @@
 require_relative 'target_parser'
-require_relative 'mobile_devices'
 
 module RDee
   class ConnectionError < StandardError
