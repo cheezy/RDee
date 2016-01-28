@@ -64,8 +64,8 @@ module RDee
 
     def capabilities(platform, version, host)
       case platform
-        when 'iphone' then   capabilities = Selenium::WebDriver::Remote::Capabilities.iphone({app: "safari", device: "iPhone 6", platformName: "iOS", platformVersion: "8.4", deviceName: "iPhone 6", browserName: "iPhone"})
-        when 'ipad'   then   capabilities = Selenium::WebDriver::Remote::Capabilities.iphone({app: "safari", device: "iPad Retina", platformName: "iOS", platformVersion: "8.4", deviceName: "iPad Retina", browserName: "iPad"})
+        when :iphone then   capabilities = Selenium::WebDriver::Remote::Capabilities.iphone({app: "safari", device: "iPhone 6", platformName: "iOS", platformVersion: "8.4", deviceName: "iPhone 6", browserName: "iPhone"})
+        when :ipad   then   capabilities = Selenium::WebDriver::Remote::Capabilities.iphone({app: "safari", device: "iPad Retina", platformName: "iOS", platformVersion: "8.4", deviceName: "iPad Retina", browserName: "iPad"})
         else capabilities = Selenium::WebDriver::Remote::Capabilities.send platform
       end
       capabilities.version = version unless version.nil?
