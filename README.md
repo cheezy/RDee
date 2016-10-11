@@ -61,6 +61,7 @@ optional.  Currently the following host os values are available:
 
 | host | description |
 | --- | --- |
+| win10 | Windows 10 |
 | win81 | Windows 8.1 |
 | win8 | Windows 8 |
 | win7 | Windows 7 |

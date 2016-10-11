@@ -13,6 +13,12 @@ Feature: RDee should work well with browsers on a remote selenium grid
     And I should be able to close the connection
 
   @chrome
+  Scenario: Creating a browser on Windows 10
+    When I establish a chrome32_win10 browser on the remote machine using Watir
+    Then I should be able to perform a google search for cheezyworld
+    And I should be able to close the connection
+
+  @chrome
   Scenario: Creating a browser on Windows 8.1
     When I establish a chrome32_win81 browser on the remote machine using Watir
     Then I should be able to perform a google search for cheezyworld

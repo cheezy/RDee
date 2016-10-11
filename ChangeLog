@@ -2,6 +2,9 @@
 * Enhancements
   * Added yosemite as a target
   * Added ios80 and ios81 as targets
+  * Removed support for Snow Lepord
+  * Added support for El Capitan
+  * Added support for Windows 10
 
 === Release 0.3 / 8-September-2014
 * Enhancements
