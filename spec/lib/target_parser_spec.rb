@@ -26,6 +26,11 @@ describe RDee::TargetParser do
     expect(version).to be_nil
   end
 
+  it "should parse the windows 10 host" do
+    target, version, host = parser.parse(:firefox30_win10)
+    expect(host).to eql 'Windows 10'
+  end
+
   it "should parse the windows 8.1 host" do
     target, version, host = parser.parse(:firefox30_win81)
     expect(host).to eql 'Windows 8.1'
@@ -46,9 +51,9 @@ describe RDee::TargetParser do
     expect(host).to eql 'Windows XP'
   end
 
-  it "should parse snow leopard" do
-    target, version, host = parser.parse(:firefox30_snow_leopard)
-    expect(host).to eql 'OS X 10.6'
+  it "should parse el capitan" do
+    target, version, host = parser.parse(:firefox30_el_capitan)
+    expect(host).to eql 'OS X 10.11'
   end
 
   it "should parse mountain lion" do

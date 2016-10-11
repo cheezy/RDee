@@ -231,6 +231,13 @@ end
       allow(capabilities).to receive(:firefox).and_return(desired_capabilities)
     end
 
+    it "should properly identify Windows 10" do
+      expect(desired_capabilities).to receive(:version=).with('30')
+      expect(desired_capabilities).to receive(:platform=).with('Windows 10')
+      expect(watir_browser).to receive(:new)
+      RDee.watir_browser :firefox30_win10, url: 'http://blah'
+    end
+
     it "should properly identify Windows 8.1" do
       expect(desired_capabilities).to receive(:version=).with('30')
       expect(desired_capabilities).to receive(:platform=).with('Windows 8.1')
@@ -259,11 +266,11 @@ end
       RDee.watir_browser :firefox30_winxp, url: 'http://blah'
     end
 
-    it "should properly identify Snow Leopard" do
+    it "should properly identify El Capitan" do
       expect(desired_capabilities).to receive(:version=).with('30')
-      expect(desired_capabilities).to receive(:platform=).with('OS X 10.6')
+      expect(desired_capabilities).to receive(:platform=).with('OS X 10.11')
       expect(watir_browser).to receive(:new)
-      RDee.watir_browser :firefox30_snow_leopard, url: 'http://blah'
+      RDee.watir_browser :firefox30_el_capitan, url: 'http://blah'
     end
 
     it "should properly identify Mountain Lion" do
