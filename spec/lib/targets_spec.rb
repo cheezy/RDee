@@ -211,7 +211,20 @@ describe "Supported browser combinations" do
       RDee.watir_browser :iphone_ios71, url: 'http://blah'
     end
 
-  end
+    it "includes iPhone with ios 8.0" do
+      expect(desired_capabilities).to receive(:version=).with('8.0')
+      expect(desired_capabilities).to receive(:platform=).with('OS X 10.10')
+      expect(watir_browser).to receive(:new).with(:remote, url: 'http://blah', desired_capabilities: anything())
+      RDee.watir_browser :iphone_ios80, url: 'http://blah'
+    end
+
+      it "includes iPhone with ios 8.1" do
+      expect(desired_capabilities).to receive(:version=).with('8.1')
+      expect(desired_capabilities).to receive(:platform=).with('OS X 10.10')
+      expect(watir_browser).to receive(:new).with(:remote, url: 'http://blah', desired_capabilities: anything())
+      RDee.watir_browser :iphone_ios81, url: 'http://blah'
+    end
+end
 
   context "for hosts" do
     before(:each) do
