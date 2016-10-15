@@ -13,9 +13,9 @@ describe RDee do
 
     it "should catch and print exceptions that occur when establishing a connection" do
       expect(watir_browser).to receive(:new).and_raise(Exception, 'foo')
-      expect{ RDee.watir_browser }.to raise_error(RDee::ConnectionError, 'foo')
+      expect { RDee.watir_browser }.to raise_error(RDee::ConnectionError, 'foo')
     end
-end
+  end
 
   context "when getting a connection for Selenium" do
     let(:selenium_browser) { Selenium::WebDriver }
@@ -27,9 +27,9 @@ end
 
     it "should catch and print exceptions that occur when establishing a connection" do
       expect(selenium_browser).to receive(:for).and_raise(Exception, 'foo')
-      expect{ RDee.selenium_browser }.to raise_error(RDee::ConnectionError, 'foo')
+      expect { RDee.selenium_browser }.to raise_error(RDee::ConnectionError, 'foo')
     end
-end
+  end
 
   context "when using common functionality" do
     it "should use the BROWSER environment variable when present" do
@@ -82,7 +82,7 @@ end
     end
 
   end
-  
+
   context "when passing additional browser options" do
     it "should allow users to add additional options for chrome by configuration" do
       RDee.configure do |config|

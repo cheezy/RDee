@@ -1,7 +1,6 @@
-=== Release 0.4
+=== Release 0.4 / 15 October 2016
 * Enhancements
-  * Added yosemite as a target
-  * Added ios80 and ios81 as targets
+  * Added support for Yosemite
   * Removed support for Snow Lepord
   * Added support for El Capitan
   * Added support for Windows 10
