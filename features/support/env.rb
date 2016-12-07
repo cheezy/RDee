@@ -1,6 +1,6 @@
 
 require 'rspec'
-require 'watir-webdriver'
+require 'watir'
 require 'selenium-webdriver'
 require 'page-object'
 require 'rdee'

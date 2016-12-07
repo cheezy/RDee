@@ -86,11 +86,11 @@ require 'rdee/additional_options'
 #
 module RDee
 
-  def self.watir_browser(target = :firefox, options = {})
+  def self.watir_browser(target = :chrome, options = {})
     factory.watir_browser(target, options)
   end
 
-  def self.selenium_browser(target = :firefox, options = {})
+  def self.selenium_browser(target = :chrome, options = {})
     factory.selenium_browser(target, options)
   end
 

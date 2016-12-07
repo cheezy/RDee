@@ -7,7 +7,7 @@ describe RDee do
 
   context "when getting a connection for Watir" do
     it "should create a Firefox browser by default" do
-      expect(watir_browser).to receive(:new).with(:firefox)
+      expect(watir_browser).to receive(:new).with(:chrome)
       RDee.watir_browser
     end
 
@@ -20,8 +20,8 @@ describe RDee do
   context "when getting a connection for Selenium" do
     let(:selenium_browser) { Selenium::WebDriver }
 
-    it "should create a Firefox browser by default" do
-      expect(selenium_browser).to receive(:for).with(:firefox)
+    it "should create a Chrome browser by default" do
+      expect(selenium_browser).to receive(:for).with(:chrome)
       RDee.selenium_browser
     end
 

@@ -1,3 +1,8 @@
+=== Release 0.5
+* Enhancements
+  * Updated to use Watir instead of WatirWebdriver
+  * Updated to make chrome the default browser
+
 === Release 0.4 / 15 October 2016
 * Enhancements
   * Added support for Yosemite
