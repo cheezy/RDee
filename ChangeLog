@@ -1,4 +1,4 @@
-=== Release 0.5
+=== Release 0.5 / 7 December 2016
 * Enhancements
   * Updated to use Watir instead of WatirWebdriver
   * Updated to make chrome the default browser
