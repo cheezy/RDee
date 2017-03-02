@@ -1,3 +1,7 @@
+=== Release 0.6
+* Enhancements
+  * Added support for Sierra
+
 === Release 0.5 / 7 December 2016
 * Enhancements
   * Updated to use Watir instead of WatirWebdriver

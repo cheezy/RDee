@@ -52,6 +52,7 @@ module RDee
           mavricks: 'OS X 10.9',
           yosemite: 'OS X 10.10',
           el_capitan: 'OS X 10.11',
+          sierra: 'macOS 10.12',
           linux: 'Linux',
           ios60: 'OS X 10.8',
           ios61: 'OS X 10.8',

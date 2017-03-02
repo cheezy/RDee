@@ -1,5 +1,5 @@
 When(/^I establish a (.+) browser on the local machine using (.+)$/) do |browser, platform|
-  @browser = RDee.send "#{platform.downcase}_browser", browser.downcase.to_sym 
+  @browser = RDee.send "#{platform.downcase}_browser", browser.downcase.to_sym
 end
 
 When(/^I establish a (.+) browser with a variable using (.+)$/) do |browser, platform|
@@ -10,7 +10,8 @@ end
 
 When(/^I establish a (.+) browser on the remote machine using (.+)$/) do |browser, platform|
   @browser = RDee.send "#{platform.downcase}_browser",
-  browser.to_sym, url: 'http://rdee:730071ad-7331-4d65-bd56-ec3ebfdd8232@ondemand.saucelabs.com:80/wd/hub'
+                       browser.to_sym,
+                       url: 'http://rdee:730071ad-7331-4d65-bd56-ec3ebfdd8232@ondemand.saucelabs.com:80/wd/hub'
 end
 
 Then(/^I should be able to perform a google search for cheezyworld$/) do

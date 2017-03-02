@@ -3,6 +3,9 @@ require 'rdee/browser_factory'
 require 'rdee/target_parser'
 require 'rdee/desired_capabilities'
 require 'rdee/additional_options'
+require 'watir'
+require 'selenium-webdriver'
+require 'net/http/persistent'
 
 #
 # RDee was designed to make it easy for your tests to switch between different browsers.  It
