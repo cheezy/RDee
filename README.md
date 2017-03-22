@@ -11,9 +11,9 @@ can select browsers that are running on your local machine or on a Selenium Grid
 you select a browser is by calling one of the following methods:
 
 ````ruby
-RDee.selenium_browser(target = :firefox, options = {})
+RDee.selenium_browser(target = :chrome, options = {})
 # or
-RDee.watir_browser(target = :firefox, options = {})
+RDee.watir_browser(target = :chrome, options = {})
 ````
 
 These methods take two optional parameters.  The first is the target browser.  The second
@@ -49,15 +49,21 @@ firefox30_win8
 ````
 
 The first part of the target determines what browser to use.  At the current time you can
-specify `firefox`, `chrome`, `ie`, `safari`, `phantomjs` or `iphone`.  In the near future we will be supporting more
+specify `firefox`, `chrome`, `ie`, `safari`, `phantomjs` or `ios`.  In the near future we will be supporting more
 mobile platforms so stay tuned.
 
 Immediately following the browser is the version.  This is optional and if you do not specify
 it will select whatever version is available.  It is up to you to make sure that the browser
 and version combination are valid.
 
+For mobile the version is the version of the OS you require replacing the
+dot with an underscore.  For example, `:ios10_2` will use iOS 10.2.  You will
+provide the additional information like the device type as additional
+values.  See below.
+
 Following the version there is an underscore followed by the host os.  This value is also
 optional.  Currently the following host os values are available:
+
 
 | host | description |
 | --- | --- |
@@ -72,12 +78,7 @@ optional.  Currently the following host os values are available:
 | el_capitan | OS X 10.11 |
 | sierra | macOS 10.12 |
 | linux | Linux |
-| ios60 | 'OS X 10.8'|
-| ios61 | 'OS X 10.8' |
-| ios70 | 'OS X 10.9' |
-| ios71 | 'OS X 10.9' |
-| ios80 | 'OS X 10.10' |
-| ios81 | 'OS X 10.10' |
+| ios | 'iOS' |
 
 The host os value is typically used when running the tests on a Selenium Grid.  It is up to
 you to ensure that the host and requested browser combination exist on your grid.
@@ -98,8 +99,54 @@ RDee.configure do | config |
   config.firefox_options = { :switches => %w[--disable-popups]}
   config.ie_options = { :switches => %w[--disable-popups]}
   config.safari_options = { :switches => %w[--disable-popups]}
+  config.ios_options = { :switches => %w[--disable-popups]}
 end
 ````
+
+### Mobile Specific Additional Settings
+Mobile is more complex that the standard desktop browsers.  In order to get everything
+to work properly on a mobile platform you will need to provide some additional information.
+Here is an example:
+
+````ruby
+mobile_capabilities = {
+  appiumVersion: '1.6.3',
+  deviceName: 'iPhone Simulator',
+  deviceOrientation: 'portrait'
+}
+RDee.watir_browser(target = :ios10_2, desired_capabilities: mobile_capabilities)
+````
+
+Another way to specify these additional capabilities is to specify them in the configure
+block like this:
+
+````ruby
+RDee.configure do | config |
+  config.url = 'http://path.to.selenium.grid/wd/hub'
+  config.ios_capabilities = {
+    appiumVersion:      '1.6.3',
+    deviceName:         'iPhone Simulator',
+    deviceOrientation:  'portrait'
+  }
+end
+````
+
+Using the config allows us to set the values via environment variables without changing code.
+
+````ruby
+RDee.configure do | config |
+  config.url = 'http://path.to.selenium.grid/wd/hub'
+  config.ios_capabilities = {
+    appiumVersion:      ENV['appiumVersion'],
+    deviceName:         ENV['deviceName'],
+    deviceOrientation:  ENV['deviceOrientation']
+  }
+end
+````
+
+
+To see what options you should use please look at the
+[Sauce Labs Configurator](https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/).
 
 
 ## Installation

@@ -172,25 +172,25 @@ describe RDee do
       end
     end
 
-    it "should allow users to add additional options for iPhone by configuration" do
+    it "should allow users to add additional options for ios by configuration" do
       RDee.configure do |config|
-        config.iphone_options = {iphone_options: 'option'}
+        config.ios_options = {ios_options: 'option'}
       end
-      expect(watir_browser).to receive(:new).with(:iphone, iphone_options: 'option')
-      RDee.watir_browser(:iphone_ios70)
+      expect(watir_browser).to receive(:new).with(:ios, ios_options: 'option')
+      RDee.watir_browser(:ios8_0)
       RDee.configure do |config|
-        config.iphone_options = nil
+        config.ios_options = nil
       end
     end
 
-    it "shoudl not add iphone_options when not using iPhone" do
+    it "should not add ios_options when not using ios" do
       RDee.configure do |config|
-        config.iphone_options = {iphone_options: 'option'}
+        config.ios_options = {ios_options: 'option'}
       end
       expect(watir_browser).to receive(:new).with(:firefox)
       RDee.watir_browser(:firefox)
       RDee.configure do |config|
-        config.iphone_options = nil
+        config.ios_options = nil
       end
     end
 

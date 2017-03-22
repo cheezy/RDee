@@ -38,7 +38,7 @@ module RDee
     end
 
     def mobile_version(value)
-      value.to_s.split(/_/).slice(1..-1)[0][-2, 2].insert(1, '.')
+      value.to_s.match(/[a-z]+(\d+\_*\d*)/)[1].gsub('_', '.')
     end
 
     def host_lookup
@@ -54,12 +54,7 @@ module RDee
           el_capitan: 'OS X 10.11',
           sierra: 'macOS 10.12',
           linux: 'Linux',
-          ios60: 'OS X 10.8',
-          ios61: 'OS X 10.8',
-          ios70: 'OS X 10.9',
-          ios71: 'OS X 10.9',
-          ios80: 'OS X 10.10',
-          ios81: 'OS X 10.10'
+          ios: 'iOS'
       }
     end
 

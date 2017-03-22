@@ -3,6 +3,6 @@ class CheezyWorld
 
   page_url 'http://cheezyworld.com'
 
-  h2(:transformations, class: 'post-title')
+  h1(:first_heading, class: 'entry-title')
   
 end

@@ -8,9 +8,19 @@ module RDee
 
     
     def mobile_targets
-      @mobile_targets ||= [
-        :iphone
-      ]
+      mobile_browsers.keys
+    end
+
+    def mobile_browsers
+      @mobile_browsers ||= {
+        ios: 'Safari'
+      }
+    end
+
+    def mobile_platform
+      @mobile_platform ||= {
+          ios: 'iOS'
+      }
     end
     
   end

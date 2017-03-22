@@ -8,7 +8,31 @@ When(/^I establish a (.+) browser with a variable using (.+)$/) do |browser, pla
   ENV.delete 'RDEE_BROWSER'
 end
 
-When(/^I establish a (.+) browser on the remote machine using (.+)$/) do |browser, platform|
+When(/^I use RDee configuration to establish an (.+) mobile browser$/) do |browser|
+  RDee.configure do |config|
+    config.url = 'http://rdee:730071ad-7331-4d65-bd56-ec3ebfdd8232@ondemand.saucelabs.com:80/wd/hub'
+    config.ios_capabilities = {
+      appiumVersion:      '1.6.3',
+      deviceName:         'iPhone Simulator',
+      deviceOrientation:  'portrait'
+    }
+    @browser = RDee.watir_browser(browser.to_sym)
+  end
+end
+
+When(/^I establish an (.+) browser on the remote machine using (.+)$/) do |browser, platform|
+  mobile_options = {
+      appiumVersion: '1.6.3',
+      deviceName: 'iPhone Simulator',
+      deviceOrientation: 'portrait'
+  }
+  @browser = RDee.send "#{platform.downcase}_browser",
+                       browser.to_sym,
+                       desired_capabilities: mobile_options,
+                       url: 'http://rdee:730071ad-7331-4d65-bd56-ec3ebfdd8232@ondemand.saucelabs.com:80/wd/hub'
+end
+
+When(/^I establish a (.+) mobile browser on the remote machine using (.+)$/) do |browser, platform|
   @browser = RDee.send "#{platform.downcase}_browser",
                        browser.to_sym,
                        url: 'http://rdee:730071ad-7331-4d65-bd56-ec3ebfdd8232@ondemand.saucelabs.com:80/wd/hub'
@@ -31,10 +55,20 @@ When(/^I go to the cheezyworld site$/) do
   visit CheezyWorld
 end
 
-When(/^I select the transformations link$/) do
-  on(CheezyWorld).transformations_element.click
-end
-
 Then(/^I should see the text "(.*?)"$/) do |message|
   expect(@current_page.text).to include message
+end
+
+
+And(/^I select the first title link$/) do
+  on(CheezyWorld) do |page|
+    @first_heading = page.first_heading_element.text
+    page.first_heading_element.click
+  end
+end
+
+Then(/^I should see the text from the first heading$/) do
+  on(CheezyWorld) do |page|
+    expect(page.text).to include @first_heading
+  end
 end

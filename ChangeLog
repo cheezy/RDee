@@ -1,3 +1,9 @@
+=== Release 0.7
+* Enhancements
+  * Full support for all iOS devices
+  * Ability to set additional ios capabilities via configuration
+  * renamed iphone_options to ios_options
+
 === Release 0.6 / 1 March 2017
 * Enhancements
   * Added support for Sierra

@@ -50,7 +50,7 @@ Feature: RDee should work well with browsers on a remote selenium grid
 
   @chrome
   Scenario: Creating a browser on Mountain Lion
-    When I establish a chrome32_mountain_lion browser on the remote machine using Watir
+    When I establish a chrome32_sierra browser on the remote machine using Watir
     Then I should be able to perform a google search for cheezyworld
     And I should be able to close the connection
 

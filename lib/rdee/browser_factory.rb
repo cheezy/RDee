@@ -6,14 +6,16 @@ require_relative 'additional_options'
 module RDee
   class ConnectionError < StandardError
   end
-  
+
   class BrowserFactory
     include TargetParser
     include DesiredCapabilities
     include AdditionalOptions
 
-    attr_accessor :url, :persistent_http, :chrome_options, :firefox_options,
-    :ie_options, :safari_options, :iphone_options
+    attr_accessor :url, :persistent_http
+    attr_accessor :chrome_options, :firefox_options, :ie_options,
+                  :safari_options, :ios_options
+    attr_accessor :ios_capabilities
 
     def watir_browser(target, options)
       platform, options = platform_and_options(target, options)
@@ -54,7 +56,7 @@ module RDee
     end
 
     def platform_and_options(target, options)
-      target = ENV['RDEE_BROWSER'].to_sym if ENV['RDEE_BROWSER'] 
+      target = ENV['RDEE_BROWSER'].to_sym if ENV['RDEE_BROWSER']
       platform, version, host = parse(target)
       options.merge! additional_options_for target
       options[:url] = url unless url.nil?
