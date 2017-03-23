@@ -20,7 +20,13 @@ When(/^I use RDee configuration to establish an (.+) mobile browser$/) do |brows
   end
 end
 
-When(/^I establish an (.+) browser on the remote machine using (.+)$/) do |browser, platform|
+When(/^I establish an? (.+) browser on the remote machine using (.+)$/) do |browser, platform|
+  @browser = RDee.send "#{platform.downcase}_browser",
+                       browser.to_sym,
+                       url: 'http://rdee:730071ad-7331-4d65-bd56-ec3ebfdd8232@ondemand.saucelabs.com:80/wd/hub'
+end
+
+When(/^I establish an? mobile browser for (.+) on the remote machine using (.+)$/) do |browser, platform|
   mobile_options = {
       appiumVersion: '1.6.3',
       deviceName: 'iPhone Simulator',
@@ -29,12 +35,6 @@ When(/^I establish an (.+) browser on the remote machine using (.+)$/) do |brows
   @browser = RDee.send "#{platform.downcase}_browser",
                        browser.to_sym,
                        desired_capabilities: mobile_options,
-                       url: 'http://rdee:730071ad-7331-4d65-bd56-ec3ebfdd8232@ondemand.saucelabs.com:80/wd/hub'
-end
-
-When(/^I establish a (.+) mobile browser on the remote machine using (.+)$/) do |browser, platform|
-  @browser = RDee.send "#{platform.downcase}_browser",
-                       browser.to_sym,
                        url: 'http://rdee:730071ad-7331-4d65-bd56-ec3ebfdd8232@ondemand.saucelabs.com:80/wd/hub'
 end
 
@@ -71,4 +71,12 @@ Then(/^I should see the text from the first heading$/) do
   on(CheezyWorld) do |page|
     expect(page.text).to include @first_heading
   end
+end
+
+When(/^I set switches via configuration and use a Watir browser$/) do
+  ENV['RDEE_BROWSER'] = 'chrome'
+  RDee.configure do |config|
+    config.chrome_options = { :switches => %w[--disable-extensions]}
+  end
+  @browser = RDee.watir_browser
 end

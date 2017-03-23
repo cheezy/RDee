@@ -38,3 +38,8 @@ Feature: RDee should work well with browsers when target is set via environment 
     Then I should be able to perform a google search for cheezyworld
     And I should be able to close the connection
 
+  @chrome
+  Scenario: Using switches that are passed to the browser
+    When I set switches via configuration and use a Watir browser
+    Then I should be able to perform a google search for cheezyworld
+    And I should be able to close the connection
