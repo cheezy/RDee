@@ -59,7 +59,6 @@ Then(/^I should see the text "(.*?)"$/) do |message|
   expect(@current_page.text).to include message
 end
 
-
 And(/^I select the first title link$/) do
   on(CheezyWorld) do |page|
     @first_heading = page.first_heading_element.text
