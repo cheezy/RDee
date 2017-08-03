@@ -1,3 +1,7 @@
+=== Release 0.8
+* Enhancements
+  * Forced net-http-persistent to be less than 3.0 to fix issue with older Windows systems
+
 === Release 0.7 / 23 March 2017
 * Enhancements
   * Full support for all iOS devices
