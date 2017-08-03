@@ -5,7 +5,7 @@ module RDee
       options = {}
       options.merge!(chrome_options) if need_chrome_options? target
       options.merge!(firefox_options) if need_firefox_options? target
-      options.merge!(ie_options) if need_ie_optons? target
+      options.merge!(ie_options) if need_ie_options? target
       options.merge!(safari_options) if need_safari_options? target
       options.merge!(ios_options) if need_ios_options? target
       options
@@ -19,7 +19,7 @@ module RDee
       not firefox_options.nil? and target.to_s.include? 'firefox'
     end
 
-    def need_ie_optons?(target)
+    def need_ie_options?(target)
       not ie_options.nil? and target.to_s.include? 'ie'
     end
 
