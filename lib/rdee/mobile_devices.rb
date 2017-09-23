@@ -13,13 +13,15 @@ module RDee
 
     def mobile_browsers
       @mobile_browsers ||= {
-        ios: 'Safari'
+        ios: 'Safari',
+        android: 'Browser'
       }
     end
 
     def mobile_platform
       @mobile_platform ||= {
-          ios: 'iOS'
+          ios: 'iOS',
+          android: 'Android'
       }
     end
     

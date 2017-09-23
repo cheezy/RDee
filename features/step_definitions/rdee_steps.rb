@@ -38,6 +38,18 @@ When(/^I establish an? mobile browser for (.+) on the remote machine using (.+)$
                        url: 'http://rdee:730071ad-7331-4d65-bd56-ec3ebfdd8232@ondemand.saucelabs.com:80/wd/hub'
 end
 
+When(/^I establish an? mobile android browser for (.+) on the remote machine using (.+)$/) do |browser, platform|
+  mobile_options = {
+      appiumVersion: '1.6.4',
+      deviceName: 'Google Nexus 7 HD Emulator',
+      deviceOrientation: 'portrait'
+  }
+  @browser = RDee.send "#{platform.downcase}_browser",
+                       browser.to_sym,
+                       desired_capabilities: mobile_options,
+                       url: 'http://rdee:730071ad-7331-4d65-bd56-ec3ebfdd8232@ondemand.saucelabs.com:80/wd/hub'
+end
+
 Then(/^I should be able to perform a google search for cheezyworld$/) do
   visit(GoogleSearch) do |page|
     page.perform_search

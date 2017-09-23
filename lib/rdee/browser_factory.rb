@@ -14,8 +14,8 @@ module RDee
 
     attr_accessor :url, :persistent_http
     attr_accessor :chrome_options, :firefox_options, :ie_options,
-                  :safari_options, :ios_options
-    attr_accessor :ios_capabilities
+                  :safari_options, :ios_options, :android_options
+    attr_accessor :ios_capabilities, :android_capabilities
 
     def watir_browser(target, options)
       platform, options = platform_and_options(target, options)

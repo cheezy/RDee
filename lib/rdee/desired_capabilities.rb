@@ -30,7 +30,6 @@ module RDee
               platformVersion: version,
               platformName: mobile_platform[platform],
               browserName: mobile_browsers[platform],
-              platform: :mac,
               javascript_enabled: true
           }.merge(existing_caps))
     end

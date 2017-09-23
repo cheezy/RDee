@@ -194,5 +194,26 @@ describe RDee do
       end
     end
 
+    it "should allow users to add additional options for android by configuration" do
+      RDee.configure do |config|
+        config.android_options = {android_options: 'option'}
+      end
+      expect(watir_browser).to receive(:new).with(:android, android_options: 'option')
+      RDee.watir_browser(:android4_4)
+      RDee.configure do |config|
+        config.android_options = nil
+      end
+    end
+
+    it "should not add android_options when not using android" do
+      RDee.configure do |config|
+        config.android_options = {android_options: 'option'}
+      end
+      expect(watir_browser).to receive(:new).with(:firefox)
+      RDee.watir_browser(:firefox)
+      RDee.configure do |config|
+        config.android_options = nil
+      end
+    end
   end
 end

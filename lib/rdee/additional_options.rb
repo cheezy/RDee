@@ -8,6 +8,7 @@ module RDee
       options.merge!(ie_options) if need_ie_options? target
       options.merge!(safari_options) if need_safari_options? target
       options.merge!(ios_options) if need_ios_options? target
+      options.merge!(android_options) if need_android_options? target
       options
     end
 
@@ -29,6 +30,10 @@ module RDee
 
     def need_ios_options?(target)
       not ios_options.nil? and target.to_s.include? 'ios'
+    end
+
+    def need_android_options?(target)
+      not android_options.nil? and target.to_s.include? 'android'
     end
 
   end

@@ -15,7 +15,6 @@ describe 'Mobile targets' do
           platformVersion: '1.0',
           platformName: 'iOS',
           browserName: 'Safari',
-          platform: :mac,
           javascript_enabled: true
       }
     }
@@ -48,6 +47,42 @@ describe 'Mobile targets' do
       RDee.configure do |config|
         config.url = nil
         config.ios_capabilities = nil
+      end
+    end
+  end
+
+  context 'when using Android' do
+    let(:caps) {
+      {
+          platformVersion: '1.0',
+          platformName: 'Android',
+          browserName: 'Browser',
+          javascript_enabled: true
+      }
+    }
+
+    it 'includes Android 4.4' do
+      caps[:platformVersion] = '4.4'
+      expect(capabilities).to receive(:new).with(caps)
+      RDee.watir_browser :android4_4, url: 'http://blah'
+    end
+
+    it 'should allow additional capabilities to be pass in via configuration' do
+      android_capabilities = {
+          appiumVersion: '1.6.4',
+          deviceName: 'Google Nexus 7 HD Emulator',
+          deviceOrientation: 'portrait'
+      }
+      RDee.configure do |config|
+        config.url = 'http://blah'
+        config.android_capabilities = android_capabilities
+      end
+      caps[:platformVersion] = '4.4'
+      expect(capabilities).to receive(:new).with(caps.merge(android_capabilities))
+      RDee.watir_browser :android4_4
+      RDee.configure do |config|
+        config.url = nil
+        config.android_capabilities = nil
       end
     end
   end

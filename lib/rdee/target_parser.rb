@@ -54,7 +54,8 @@ module RDee
           el_capitan: 'OS X 10.11',
           sierra: 'macOS 10.12',
           linux: 'Linux',
-          ios: 'iOS'
+          ios: 'iOS',
+          android: 'Android'
       }
     end
 
