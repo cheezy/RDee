@@ -57,9 +57,9 @@ it will select whatever version is available.  It is up to you to make sure that
 and version combination are valid.
 
 For mobile the version is the version of the OS you require replacing the
-dot with an underscore.  For example, `:ios10_2` will use iOS 10.2.  You will
-provide the additional information like the device type as additional
-values.  See below.
+dot with an underscore.  For example, `:ios10_2` will use iOS 10.2 and `:android4_4`
+will use Android 4.4.  You will provide the additional information like the device type as 
+additional values.  See below.
 
 Following the version there is an underscore followed by the host os.  This value is also
 optional.  Currently the following host os values are available:
@@ -79,6 +79,7 @@ optional.  Currently the following host os values are available:
 | sierra | macOS 10.12 |
 | linux | Linux |
 | ios | 'iOS' |
+| android | 'Android' |
 
 The host os value is typically used when running the tests on a Selenium Grid.  It is up to
 you to ensure that the host and requested browser combination exist on your grid.
@@ -95,11 +96,12 @@ sent to a specific type of browser when it is used.  Here are examples:
 RDee.configure do | config |
   config.url = 'http://path.to.selenium.grid/wd/hub'
   config.persistent_http = true
-  config.chrome_options = { :switches => %w[--disable-extensions]}
-  config.firefox_options = { :switches => %w[--disable-popups]}
-  config.ie_options = { :switches => %w[--disable-popups]}
-  config.safari_options = { :switches => %w[--disable-popups]}
-  config.ios_options = { :switches => %w[--disable-popups]}
+  config.chrome_options = { :switches => %w[--disable-extensions] }
+  config.firefox_options = { :switches => %w[--disable-popups] }
+  config.ie_options = { :switches => %w[--disable-popups] }
+  config.safari_options = { :switches => %w[--disable-popups] }
+  config.ios_options = { :switches => %w[--disable-popups] }
+  config.android_options = { :switches => %w[--disable-popups] }
 end
 ````
 
@@ -110,12 +112,24 @@ Here is an example:
 
 ````ruby
 mobile_capabilities = {
-  appiumVersion: '1.6.3',
+  appiumVersion: '1.6.4',
   deviceName: 'iPhone Simulator',
   deviceOrientation: 'portrait'
 }
 RDee.watir_browser(target = :ios10_2, desired_capabilities: mobile_capabilities)
 ````
+
+For Android it is extremely simular:
+
+````ruby
+mobile_capabilities = {
+  appiumVersion: '1.6.4',
+  deviceName: 'Google Nexus 7 HD Emulator',
+  deviceOrientation: 'portrait'
+}
+RDee.watir_browser(target = :android4_4, desired_capabilities: mobile_capabilities)
+````
+
 
 Another way to specify these additional capabilities is to specify them in the configure
 block like this:
@@ -124,8 +138,13 @@ block like this:
 RDee.configure do | config |
   config.url = 'http://path.to.selenium.grid/wd/hub'
   config.ios_capabilities = {
-    appiumVersion:      '1.6.3',
+    appiumVersion:      '1.6.4',
     deviceName:         'iPhone Simulator',
+    deviceOrientation:  'portrait'
+  }
+  config.android_capabilities = {
+    appiumVersion:      '1.6.4',
+    deviceName:         'Google Nexus 7 HD Emulator',
     deviceOrientation:  'portrait'
   }
 end
@@ -137,13 +156,17 @@ Using the config allows us to set the values via environment variables without c
 RDee.configure do | config |
   config.url = 'http://path.to.selenium.grid/wd/hub'
   config.ios_capabilities = {
-    appiumVersion:      ENV['appiumVersion'],
-    deviceName:         ENV['deviceName'],
-    deviceOrientation:  ENV['deviceOrientation']
+    appiumVersion:      ENV['ios_appiumVersion'],
+    deviceName:         ENV['ios_deviceName'],
+    deviceOrientation:  ENV['ios_deviceOrientation']
+  }
+  config.android_capabilities = {
+    appiumVersion:      ENV['android_appiumVersion'],
+    deviceName:         ENV['android_deviceName'],
+    deviceOrientation:  ENV['android_deviceOrientation']
   }
 end
 ````
-
 
 To see what options you should use please look at the
 [Sauce Labs Configurator](https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/).
